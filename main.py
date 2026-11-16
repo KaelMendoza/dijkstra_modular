@@ -1,37 +1,40 @@
-from typing import List, Tuple
-
-import iohandle
-from grafo import Grafo
-
-
-def construir_grafo(conexiones: List[Tuple[str, str, float]]) -> Grafo:
-    # Grafo en memoria que se llena con lo que hay en el CSV
-    grafo: Grafo = Grafo()
-
-    for origen, destino, peso in conexiones:
-        for nombre in (origen, destino):
-            if nombre not in grafo.nodos:
-                grafo.agregar_nodo(nombre)
-        grafo.agregar_conexion(origen, destino, peso)
-
-    return grafo
+# Título: Dijkstra en consola
+# Autor: Dante Tlacaelel Mendoza Alcantar
+# Fecha: 16/11/2026
+# Descripción: Menú de consola para agregar conexiones y calcular rutas.
+import io_handler
+from grafo import Grafo, construir_grafo
 
 
 def agregar_conexion() -> None:
-    if iohandle.guardar_conexion(iohandle.pedir_conexion()):
-        print("Conexión guardada.")
+    while True:
+        origen: str = input("Nodo origen: ")
+        destino: str = input("Nodo destino: ")
+        peso: str = input("Peso: ")
+
+        try:
+            conexion = io_handler.validar_conexion(origen, destino, peso)
+            io_handler.guardar_conexion(conexion)
+        except ValueError as error:
+            print("Error:", error)
+            continue
+        except OSError:
+            print("No se pudo guardar en el archivo.")
+        break
+
+    print("Conexión guardada.")
 
 
 def calcular_ruta() -> None:
-    grafo: Grafo = construir_grafo(iohandle.cargar_conexiones())
-
-    if len(grafo.nodos) == 0:
-        print("No hay conexiones, agrega alguna primero.")
+    try:
+        grafo: Grafo = construir_grafo(io_handler.cargar_conexiones())
+    except FileNotFoundError:
+        print("Todavía no existe el archivo nodos.csv.")
         return
 
     print("Nodos:", ", ".join(sorted(grafo.nodos)))
-    origen: str = iohandle.leer_nombre("Nodo origen: ")
-    destino: str = iohandle.leer_nombre("Nodo destino: ")
+    origen: str = input("Nodo origen: ").strip().upper()
+    destino: str = input("Nodo destino: ").strip().upper()
 
     if origen not in grafo.nodos or destino not in grafo.nodos:
         print("Alguno de los nodos no existe.")

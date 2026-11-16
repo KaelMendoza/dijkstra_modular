@@ -1,3 +1,7 @@
+# Título: Grafo ponderado y algoritmo de Dijkstra
+# Autor: Dante Tlacaelel Mendoza Alcantar
+# Fecha: 16/11/2026
+# Descripción: Clases Nodo y Grafo con el cálculo de la ruta más corta.
 from typing import Dict, List, Optional, Set, Tuple
 
 
@@ -79,3 +83,16 @@ class Grafo:
 
         ruta.reverse()
         return distancias[destino], ruta
+
+
+def construir_grafo(conexiones: List[Tuple[str, str, float]]) -> Grafo:
+    # Grafo en memoria que se llena con las conexiones recibidas
+    grafo: Grafo = Grafo()
+
+    for origen, destino, peso in conexiones:
+        for nombre in (origen, destino):
+            if nombre not in grafo.nodos:
+                grafo.agregar_nodo(nombre)
+        grafo.agregar_conexion(origen, destino, peso)
+
+    return grafo
