@@ -1,5 +1,5 @@
 # Título: Persistencia y validación de conexiones
-# Autor: Dante Tlacaelel Mendoza Alcantar
+# Nombre: Dante Tlacaelel Mendoza Alcantar
 # Fecha: 16/11/2026
 # Descripción: Lee y guarda las conexiones en nodos.csv y valida los datos.
 import csv

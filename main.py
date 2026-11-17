@@ -1,5 +1,5 @@
 # Título: Dijkstra en consola
-# Autor: Dante Tlacaelel Mendoza Alcantar
+#Nombre: Dante Tlacaelel Mendoza Alcantar
 # Fecha: 16/11/2026
 # Descripción: Menú de consola para agregar conexiones y calcular rutas.
 import io_handler
