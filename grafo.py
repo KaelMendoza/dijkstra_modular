@@ -1,5 +1,5 @@
 # Título: Grafo ponderado y algoritmo de Dijkstra
-# Autor: Dante Tlacaelel Mendoza Alcantar
+# Nombre: Dante Tlacaelel Mendoza Alcantar
 # Fecha: 16/11/2026
 # Descripción: Clases Nodo y Grafo con el cálculo de la ruta más corta.
 from typing import Dict, List, Optional, Set, Tuple
